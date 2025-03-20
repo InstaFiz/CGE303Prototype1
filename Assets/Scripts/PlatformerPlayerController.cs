@@ -33,10 +33,11 @@ public class PlatformerPlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-	if (Input.GetButtonDown("Jump") && isGrounded)
-	    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-	    playerAudio.PlayOneShot(jumpSound, 1.0f);
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
+        }
     }
 
     void FixedUpdate()

@@ -21,9 +21,9 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         // init values
-	gameOver = false;
-	won = false;
-	score = 0;
+        gameOver = false;
+	    won = false;
+	    score = 0;
     }
 
     // Update is called once per frame
