@@ -17,12 +17,14 @@ public class PlatformerPlayerController : MonoBehaviour
     public AudioClip jumpSound;
     private AudioSource playerAudio;
 
+    private Animator animator;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-	playerAudio = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+	    playerAudio = GetComponent<AudioSource>();
 
 	if (GroundCheck == null)
 	    Debug.LogError("GroundCheck not assigned to the player controller!");
@@ -43,11 +45,15 @@ public class PlatformerPlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-	isGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, GroundLayer);
+	    isGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, GroundLayer);
 
-	if (horizontalInput > 0)
-	    transform.localScale = new Vector3(1f, 1f, 1f);
-	else if (horizontalInput < 0)
-	    transform.localScale = new Vector3(-1f, 1f, 1f);
+        animator.SetFloat("xVelocityAbs", Mathf.Abs(rb.velocity.x));
+        animator.SetFloat("yVelocity", rb.velocity.y);
+        animator.SetBool("onGround", isGrounded);
+
+        if (horizontalInput > 0)
+	        transform.localScale = new Vector3(1f, 1f, 1f);
+	    else if (horizontalInput < 0)
+	        transform.localScale = new Vector3(-1f, 1f, 1f);
     }
 }
